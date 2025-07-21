@@ -19,13 +19,15 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default function Dishes() {
   const [dishes, setDishes] = useState([]);
   const [user, setUser] = useState(null);
-  const [newDish, setNewDish] = useState({
+ const [newDish, setNewDish] = useState({
     name: "",
     description: "",
     priceOriginal: "",
     priceDiscounted: "",
     image: null,
+    category: "",
   });
+  const [filterCategory, setFilterCategory] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingDish, setEditingDish] = useState(null);
   const [commentModal, setCommentModal] = useState(null);
@@ -152,6 +154,10 @@ export default function Dishes() {
   };
 
   const capitalizeWords = (text) => text.replace(/\b\w/g, (char) => char.toUpperCase());
+
+  const filteredDishes = filterCategory
+    ? dishes.filter((dish) => dish.category === filterCategory)
+    : dishes;
 
   return (
     <div id="dishes" className="p-4">

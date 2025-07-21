@@ -1,7 +1,7 @@
 // src/data/equipmentData.js
 
-const equipmentData = [
-{ id: 58, name: "", image: "/images/hero.jpg" },
+const foodData = [
+// { id: 58, name: "", image: "/images/hero.jpg" },
 { id: 80, name: "", image: "/images/banner.jpg" },
 
   { id: 34, name: "", image: "/images/img1.jpg" },
@@ -27,6 +27,6 @@ const equipmentData = [
  
 ];
 
-export default equipmentData;
+export default foodData;
 
 

@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
-import equipmentData from "../data/equipmentData";
+import foodData from "../data/foodData";
 
 const Hero = () => {
   return (
@@ -23,7 +23,7 @@ const Hero = () => {
         loop={true}
         className="h-96"
       >
-        {equipmentData.map((equipment, index) => (
+        {foodData.map((equipment, index) => (
           <SwiperSlide key={index} className="relative group">
             {/* Image */}
             <img
@@ -50,42 +50,45 @@ const Hero = () => {
               {index === 0 && (
                 <div className="relative text-center">
                   {/* Welcome Message */}
-                  <h3 className="text-[22px] font-extrabold text-yellow-300 drop-shadow-md">
-                    ⚡ Welcome to PARITE CONSULTS ⚡
-                  </h3>
+         <h1 className="text-white text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+  Welcome to <br />
+  <span className="text-[#FFA500] font-extrabold tracking-wider drop-shadow-md italic funky-font">
+    B10-Eatery
+  </span>
+</h1>
 
-                  <p className="text-[20px] text-white font-extrabold mt-12 px-4 lg:px-32">
-                    Delivering <span className="text-blue-500">Reliable</span>{" "}
-                    Building Solutions &{" "}
-                    <span className="text-blue-500">Top-Quality</span> Construction Services
-                  </p>
+              <p className="text-lg md:text-xl text-white max-w-2xl mb-6">
+                Serving you premium <span className="text-yellow-400 font-semibold">food</span> — ready for <span className="text-green-400">eat-in</span>, <span className="text-blue-300">take-away</span>, or <span className="text-pink-300">delivery</span> 🚗
+              </p>
 
                   <div className="absolute inset-x-0 bottom--16 flex justify-center">
-                    <a
-                      href="https://wa.me/2348037668773?text=Thanks%20for%20contacting%20us!"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <button className="px-6 py-2 border-2 border-green-400 text-green-400 bg-transparent rounded-full hover:bg-green-400 hover:text-white hover:scale-105 transition-transform duration-300 shadow-md">
-                        Contact Us
-                      </button>
-                    </a>
+                    <Link
+  to="dishes"
+  spy={true}
+  smooth={true}
+  offset={-70}
+  duration={500}
+>
+  <button className="px-6 py-2 border-2 border-green-400 text-green-400 bg-transparent rounded-full hover:bg-green-400 hover:text-white hover:scale-105 transition-transform duration-300 shadow-md">
+    Order Now
+  </button>
+</Link>
                   </div>
                 </div>
               )}
 
               {index !== 0 && (
-                <button
-                  className="px-6 py-2 border-2 border-green-400 text-green-400 bg-transparent rounded-full hover:bg-green-400 hover:text-white hover:scale-105 transition-transform duration-300 shadow-md"
-                  onClick={() =>
-                    window.open(
-                      "https://wa.me/2348037668773?text=Hello!%20I%20am%20interested%20in%20your%20product.",
-                      "_blank"
-                    )
-                  }
-                >
-                  Contact Us
-                </button>
+                             <Link
+  to="dishes"
+  spy={true}
+  smooth={true}
+  offset={-70}
+  duration={500}
+>
+  <button className="px-6 py-2 border-2 border-green-400 text-green-400 bg-transparent rounded-full hover:bg-green-400 hover:text-white hover:scale-105 transition-transform duration-300 shadow-md">
+    Order Now
+  </button>
+</Link>
               )}
             </div>
           </SwiperSlide>
@@ -93,39 +96,38 @@ const Hero = () => {
         ))}
       </Swiper>
 
-      {/* Additional Banner Content */}
-     <div className="bg-black">
-  {/* Additional Banner Content */}
-  <div className="px-4 lg:px-24 mt-8">
-    <h1 className="md:w-2/3 lg:text-6xl md:text-5xl text-4xl mb-5 text-white font-semibold leading-snug">
-  Your Vision. Our Expertise.
-</h1>
-
-    <div className="text-white text-lg flex flex-col-reverse md:flex-row md:items-center items-start justify-between gap-8">
-      <div>
-       <a
-  href="https://wa.me/2348037668773"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 font-semibold hover:text-orange transition-all duration-300 cursor-pointer"
+    
+      {/* Bottom Section */}
+      <div className="bg-black text-white py-10 px-6 md:px-24">
+        <h2 className="text-2xl md:text-4xl font-bold mb-4 text-center md:text-left">
+          Taste Nigeria. Love Every Bite. 🍽️
+        </h2>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <p className="text-lg md:w-2/3">
+            At <span className="text-orange-500 font-semibold">B10-Eatery</span>, we bring authentic Nigerian and continental <span className="text-yellow-400">food</span> to your table — whether you're dining <span className="underline">in</span>, picking up a quick <span className="underline">take-away</span>, or enjoying the convenience of <span className="underline">delivery</span>.
+          </p>
+         <Link
+  to="dishes"
+  spy={true}
+  smooth={true}
+  offset={-70} // adjust if your header overlaps
+  duration={500}
+  className="inline-flex items-center gap-2 text-orange-400 hover:text-white font-medium cursor-pointer"
 >
-  <span>Get a Quote</span>
+  <span>Start Your Order</span>
   <BsArrowRight />
-</a>
+</Link>
 
+        </div>
       </div>
-      <div className="md:w-1/2">
-        <p className="cs-hero_subtitle">
-          Building the future with innovative design and quality construction solutions.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-      {/* Scroll Arrow to Service Section */}
-      <Link to="services" spy={true} smooth={true} className="cs-down_btn md:mt-20 mt-8">
+      {/* Scroll Down Indicator */}
+      <Link
+        to="dishes"
+        spy={true}
+        smooth={true}
+        className="cs-down_btn md:mt-20 mt-8"
+      >
         .
       </Link>
     </div>
