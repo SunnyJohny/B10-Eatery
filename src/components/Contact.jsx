@@ -105,17 +105,26 @@ const Contact = () => {
             <div className="space-y-4">
               <div className="flex items-center">
                 <FaPhoneAlt className="text-blue-100 text-2xl mr-4" />
-                <p>08037668773, 0708394444</p>
+                <p>+2348038652949</p>
               </div>
+
+
+
+{/* Email: B10etery@gmail.com
+
+Phone: +2348038652949
+
+Address: 15 J/Mangoro Street Opp Reality P.SChool jos Platea State, Nigeria. */}
+
 
               <div className="flex items-center">
                 <FaEnvelope className="text-blue-100 text-2xl mr-4" />
-                <p>odinakaikwueme@yahoo.com</p>
+                <p>B10etery@gmail.com</p>
               </div>
 
               <div className="flex items-center">
                 <GoLocation className="text-blue-100 text-2xl mr-4" />
-                <p> Umuodu quarters, Awka, Anambra State, Nigeria.</p>
+                <p> 15 J/Mangoro Street Opp Reality P.SChool jos Platea State, Nigeria.</p>
               </div>
 
               <div className="flex items-center">
