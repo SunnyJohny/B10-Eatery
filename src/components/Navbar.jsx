@@ -111,14 +111,18 @@ const Navbar = () => {
       <header className="fixed w-full z-50 transition-all duration-300">
         <nav className={`py-4 lg:px-24 px-4 ${isSticky ? "bg-white shadow-lg" : "bg-white"}`}>
           <div className="flex justify-between items-center text-base relative">
-            {/* Logo */}
-            <a href="/" className="flex items-center">
-              <img
-                src="/images/B10EateryLOGO.png"
-                alt="Logo"
-                className="h-8"
-              />
-            </a>
+            {/* Logo with slogan under */}
+<a href="/" className="flex flex-col items-start">
+  <img
+    src="/images/B10EateryLOGO.png"
+    alt="Logo"
+    className="h-8"
+  />
+  <p className="text-sm text-red-600 font-semibold italic mt-1">
+    ...where your belly knows the best.
+  </p>
+</a>
+
 
             {/* Desktop Nav */}
             <ul className="hidden md:flex space-x-8 items-center">

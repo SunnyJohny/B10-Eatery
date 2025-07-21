@@ -100,7 +100,7 @@ const Hero = () => {
       {/* Bottom Section */}
       <div className="bg-black text-white py-10 px-6 md:px-24">
         <h2 className="text-2xl md:text-4xl font-bold mb-4 text-center md:text-left">
-          Taste Nigeria. Love Every Bite. 🍽️
+          Tasty Meals. Love Every Bite. 🍽️
         </h2>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <p className="text-lg md:w-2/3">
