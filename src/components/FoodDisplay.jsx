@@ -32,7 +32,7 @@ export default function Dishes() {
   const [filterCategory, setFilterCategory] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingDish, setEditingDish] = useState(null);
-  const [commentModal, setCommentModal] = useState(null);
+  const [commentModal, setCommentModal] = useState(null); // dishId or null
   const [commentInput, setCommentInput] = useState("");
   const [commentName, setCommentName] = useState("");
   const [commentsMap, setCommentsMap] = useState({});
@@ -141,16 +141,27 @@ export default function Dishes() {
     await updateDoc(doc(db, "dishes", id), { likes: increment(1) });
   };
 
+  // ---- FIXED COMMENT HANDLING ----
   const handleAddComment = async (dishId) => {
-    if (!commentInput || !commentName) return;
-    await addDoc(collection(db, "dishes", dishId, "comments"), {
-      text: commentInput,
-      name: commentName,
-      createdAt: serverTimestamp(),
-      userId: user?.uid || null,
-    });
-    setCommentInput("");
-    setCommentName("");
+    if (!commentInput || !commentName) {
+      toast.error("Please enter your name and a comment.");
+      return;
+    }
+    try {
+      await addDoc(collection(db, "dishes", dishId, "comments"), {
+        text: commentInput,
+        name: commentName,
+        createdAt: serverTimestamp(),
+        userId: user?.uid || null,
+      });
+      setCommentInput("");
+      setCommentName("");
+      // Optionally close modal after adding:
+      // setCommentModal(null);
+      toast.success("Comment added!");
+    } catch (err) {
+      toast.error("Failed to add comment.");
+    }
   };
 
   const handleDeleteComment = async (dishId, commentId) => {
@@ -168,13 +179,13 @@ export default function Dishes() {
     <div id="dishes" className="p-4">
       <div className="flex flex-col md:flex-row justify-between mb-4 gap-4">
         <h2 className="text-2xl font-bold">Dishes</h2>
-         <input
-    type="text"
-    placeholder="Search dishes..."
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-    className="px-4 py-2 border border-gray-300 rounded w-full md:w-1/3 focus:outline-none focus:ring focus:border-blue-300"
-  />
+        <input
+          type="text"
+          placeholder="Search dishes..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded w-full md:w-1/3 focus:outline-none focus:ring focus:border-blue-300"
+        />
         {user && (
           <button
             onClick={() => {
@@ -207,7 +218,11 @@ export default function Dishes() {
                 ❤️ {dish.likes || 0}
               </div>
               <div
-                onClick={() => setCommentModal(dish.id)}
+                onClick={() => {
+                  setCommentModal(dish.id);
+                  setCommentInput("");
+                  setCommentName("");
+                }}
                 className="cursor-pointer text-blue-600 flex items-center"
               >
                 <FaRegCommentDots className="mr-1" /> {commentsMap[dish.id]?.length || 0}
@@ -240,8 +255,71 @@ export default function Dishes() {
         ))}
       </div>
 
-      {/** Comments and Modals remain unchanged **/}
+      {/* ---- COMMENT MODAL ---- */}
+      {commentModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
+            <h3 className="text-xl font-bold mb-4">Comments</h3>
+            <div className="mb-4 max-h-48 overflow-y-auto">
+              {(commentsMap[commentModal] || []).length === 0 && (
+                <div className="text-gray-400 text-center">No comments yet.</div>
+              )}
+              {(commentsMap[commentModal] || []).map((comment) => (
+                <div key={comment.id} className="border-b py-2 flex justify-between items-center">
+                  <div>
+                    <span className="font-semibold">{comment.name || "Anonymous"}: </span>
+                    <span>{comment.text}</span>
+                    <span className="text-xs text-gray-400 ml-2">
+                      {comment.createdAt?.seconds
+                        ? new Date(comment.createdAt.seconds * 1000).toLocaleString()
+                        : ""}
+                    </span>
+                  </div>
+                 {user && (
+  <FaTrash
+    className="text-red-500 cursor-pointer ml-2"
+    onClick={() => handleDeleteComment(commentModal, comment.id)}
+  />
+)}
 
+                </div>
+              ))}
+            </div>
+            <input
+              type="text"
+              placeholder="Your name"
+              className="w-full mb-2 border px-3 py-2"
+              value={commentName}
+              onChange={(e) => setCommentName(e.target.value)}
+            />
+            <textarea
+              placeholder="Add a comment..."
+              className="w-full mb-2 border px-3 py-2"
+              value={commentInput}
+              onChange={(e) => setCommentInput(e.target.value)}
+            ></textarea>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setCommentModal(null)}
+                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+              >
+                Close
+              </button>
+              <button
+                onClick={async () => {
+                  await handleAddComment(commentModal);
+                  // Optionally: setCommentModal(null);
+                }}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Add Comment
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/** ADD/EDIT MODAL **/}
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded shadow-md w-full max-w-md">

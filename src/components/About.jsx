@@ -47,7 +47,7 @@ const iconAnimations = [
 
 const AboutUs = () => {
   return (
-    <section className="min-h-screen bg-white text-gray-800 py-12 px-5 md:px-20">
+    <section id="about" className="min-h-screen bg-white text-gray-800 py-12 px-5 md:px-20">
       {/* Title Section */}
       <div className="mb-12 text-center">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-4 tracking-tight">
@@ -105,12 +105,61 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Mission */}
-      <div className="mt-20 text-center">
-        <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
-        <p className="max-w-2xl mx-auto text-gray-700">
-          To deliver flavorful, healthy, and affordable meals to every customer, while celebrating local food culture and supporting community-driven excellence.
+      {/* Vision & Mission Section */}
+      <h3 className="text-3xl font-bold text-gray-900 text-center uppercase tracking-wide mb-8">
+        Our Vision & Mission
+      </h3>
+      <div>
+        <h4 className="text-2xl font-semibold text-gray-800 mb-4">Vision</h4>
+        <p className="text-lg text-gray-700 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 p-4 border-l-4 border-gray-800 rounded-lg shadow-md mb-8">
+          To be the heartbeat of delicious moments, bringing people together with crave-worthy food and warm hospitality in every neighborhood we serve.
         </p>
+
+        <h4 className="text-2xl font-semibold text-gray-800 mb-4">Mission</h4>
+        <p className="text-lg text-gray-700 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 p-4 border-l-4 border-gray-800 rounded-lg shadow-md">
+          To delight every guest with memorable meals, outstanding service, and a friendly atmosphere—whether you dine in, take out, or order delivery. We are committed to using quality ingredients, celebrating local flavors, and creating smiles with every plate.
+        </p>
+      </div>
+
+      {/* Testimonials Section */}
+      <div id="testimonials">
+        <h3 className="text-2xl font-bold text-gray-800 text-center uppercase tracking-wide m-8">
+          What Our Customers Say
+        </h3>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {[
+            {
+              name: "Adaora I.",
+              title: "Regular Customer",
+              phone: "",
+              image: "/images/testimonial1.jpg",
+              quote:
+                "B-10 Eatery is my go-to for comfort food. Their jollof rice is unbeatable and the staff always makes me feel right at home.",
+            },
+            {
+              name: "Chinedu O.",
+              title: "Food Enthusiast",
+              phone: "",
+              image: "/images/testimonial2.jpg",
+              quote:
+                "Whether I’m eating in or ordering delivery, B-10 Eatery never disappoints. The flavors are authentic and the service is top-notch!",
+            },
+          ].map((testimonial, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+              <img
+                src={testimonial.image}
+                alt={testimonial.name}
+                className="w-16 h-16 rounded-full object-cover mb-4"
+              />
+              <p className="text-gray-700 italic mb-4">“{testimonial.quote}”</p>
+              <h4 className="text-lg font-semibold text-gray-800">{testimonial.name}</h4>
+              <p className="text-sm text-gray-500">{testimonial.title}</p>
+              {testimonial.phone && (
+                <p className="text-sm text-gray-600">📞 {testimonial.phone}</p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
