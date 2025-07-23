@@ -209,9 +209,13 @@ export default function Dishes() {
             <p className="text-xs italic text-purple-600">{dish.category}</p>
 
             <div className="text-sm mb-2">
-              <span className="line-through text-gray-400">₦{dish.priceOriginal?.toLocaleString()}</span>
-              <span className="font-semibold text-green-600 block">₦{dish.priceDiscounted?.toLocaleString()}</span>
-            </div>
+  <span className="text-gray-400">
+    Original Price: <span className="line-through">₦{dish.priceOriginal?.toLocaleString()}</span>
+  </span>
+  <span className="font-semibold text-green-600 block">
+    Discount: ₦{dish.priceDiscounted?.toLocaleString()}
+  </span>
+</div>
 
             <div className="flex justify-between items-center mt-2">
               <div onClick={() => handleLike(dish.id)} className="cursor-pointer text-red-500">
