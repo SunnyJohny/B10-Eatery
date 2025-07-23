@@ -10,7 +10,7 @@ import {
 const socialMediaLinks = [
   { name: "YouTube", icon: <FaYoutube />, url: "#" },
   { name: "WhatsApp", icon: <FaWhatsapp />, url: "https://wa.me/+2348038652949" },
-  { name: "Facebook", icon: <FaFacebook />, url: "https://www.facebook.com/share/1D7oL6bTGc/" },
+  { name: "Facebook", icon: <FaFacebook />, url: "https://www.facebook.com/share/16hswFzy7r/" },
   { name: "LinkedIn", icon: <FaLinkedin />, url: "#" },
   { name: "TikTok", icon: <FaTiktok />, url: "https://www.facebook.com/share/1D7oL6bTGc/" },
 ];
@@ -92,7 +92,7 @@ const Footer = () => {
         <div className="mt-8 border-t border-gray-600 pt-4 text-center">
           <p className="text-sm">
             &copy; {new Date().getFullYear()} B10 Etery - CAC NO:
-            ----. All rights reserved.
+            7708208. All rights reserved.
           </p>
           <p className="text-xs italic text-gray-400 mt-2">
             Web Developer: +2348030611606
