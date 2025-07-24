@@ -110,11 +110,6 @@ const Contact = () => {
 
 
 
-{/* Email: B10etery@gmail.com
-
-Phone: +2348038652949
-
-Address: 15 J/Mangoro Street Opp Reality P.SChool jos Platea State, Nigeria. */}
 
 
               <div className="flex items-center">
@@ -122,10 +117,10 @@ Address: 15 J/Mangoro Street Opp Reality P.SChool jos Platea State, Nigeria. */}
                 <p>B10etery@gmail.com</p>
               </div>
 
-              <div className="flex items-center">
-                <GoLocation className="text-blue-100 text-2xl mr-4" />
-                <p> 15 J/Mangoro Street Opp Reality P.SChool jos Platea State, Nigeria.</p>
-              </div>
+             <div className="flex items-center">
+    <GoLocation className="text-blue-100 text-2xl mr-4" />
+    <p>No1 Ecwa Church Street Jenta Mangoro Jos, Plateau State.</p>
+  </div>
 
               <div className="flex items-center">
                 <FaTiktok className="text-blue-100 text-2xl mr-4" />

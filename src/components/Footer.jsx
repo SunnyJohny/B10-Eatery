@@ -48,7 +48,7 @@ const Footer = () => {
             <h2 className="text-xl font-bold mb-4">Contact Us</h2>
             <p>Email: B10etery@gmail.com</p>
             <p>Phone: +2348038652949</p>
-            <p>Address: 15 J/Mangoro Street Opp Reality P.SChool jos Platea State, Nigeria.</p>
+            <p>Address: No1 Ecwa Church Street Jenta Mangoro Jos, Plateau State.</p>
           </div>
 
           {/* Quick Links */}
@@ -91,7 +91,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-8 border-t border-gray-600 pt-4 text-center">
           <p className="text-sm">
-            &copy; {new Date().getFullYear()} B10 Etery - CAC NO:
+            &copy; {new Date().getFullYear()} B10 Eatery - CAC NO:
             7708208. All rights reserved.
           </p>
           <p className="text-xs italic text-gray-400 mt-2">
