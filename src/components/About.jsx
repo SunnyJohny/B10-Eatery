@@ -8,6 +8,9 @@ import {
   FaPizzaSlice,
   FaShoppingBasket
 } from "react-icons/fa";
+import { useMyContext } from "../Context/MyContext";
+
+
 
 const servicesData = [
   {
@@ -46,6 +49,8 @@ const iconAnimations = [
 ];
 
 const AboutUs = () => {
+const { comments } = useMyContext();
+
   return (
     <section id="about" className="min-h-screen bg-white text-gray-800 py-12 px-5 md:px-20">
       {/* Title Section */}
@@ -122,45 +127,38 @@ const AboutUs = () => {
       </div>
 
       {/* Testimonials Section */}
-      <div id="testimonials">
-        <h3 className="text-2xl font-bold text-gray-800 text-center uppercase tracking-wide m-8">
-          What Our Customers Say
-        </h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {[
-            {
-              name: "Adaora I.",
-              title: "Regular Customer",
-              phone: "",
-              image: "/images/testimonial1.jpg",
-              quote:
-                "B-10 Eatery is my go-to for comfort food. Their jollof rice is unbeatable and the staff always makes me feel right at home.",
-            },
-            {
-              name: "Chinedu O.",
-              title: "Food Enthusiast",
-              phone: "",
-              image: "/images/testimonial2.jpg",
-              quote:
-                "Whether I’m eating in or ordering delivery, B-10 Eatery never disappoints. The flavors are authentic and the service is top-notch!",
-            },
-          ].map((testimonial, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <img
-                src={testimonial.image}
-                alt={testimonial.name}
-                className="w-16 h-16 rounded-full object-cover mb-4"
-              />
-              <p className="text-gray-700 italic mb-4">“{testimonial.quote}”</p>
-              <h4 className="text-lg font-semibold text-gray-800">{testimonial.name}</h4>
-              <p className="text-sm text-gray-500">{testimonial.title}</p>
-              {testimonial.phone && (
-                <p className="text-sm text-gray-600">📞 {testimonial.phone}</p>
-              )}
-            </div>
-          ))}
+<div id="testimonials">
+  <h3 className="text-2xl font-bold text-gray-800 text-center uppercase tracking-wide m-8">
+    What Our Clients Say
+  </h3>
+
+  {comments.length === 0 ? (
+    <p className="text-center text-gray-500">No testimonials yet.</p>
+  ) : (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {comments.map((comment, index) => (
+        <div
+          key={index}
+          className="bg-white p-6 rounded-lg shadow-md"
+        >
+          <img
+            src={comment.photoURL || "/images/default-user.jpg"} // fallback if no image
+            alt={comment.name || "Anonymous"}
+            className="w-16 h-16 rounded-full object-cover mb-4"
+          />
+          <p className="text-gray-700 italic mb-4">“{comment.text}”</p>
+          <h4 className="text-lg font-semibold text-gray-800">
+            {comment.name || "Anonymous"}
+          </h4>
+          {comment.phone && (
+            <p className="text-sm text-gray-600">📞 {comment.phone}</p>
+          )}
         </div>
-      </div>
+      ))}
+    </div>
+  )}
+</div>
+
     </section>
   );
 };

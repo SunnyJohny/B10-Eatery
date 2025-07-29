@@ -8,7 +8,7 @@ import {
   FaPizzaSlice,
   FaShoppingBasket
 } from "react-icons/fa";
-
+const { comments } = useMyContext();
 const servicesData = [
   {
     icon: FaTruck,
@@ -176,43 +176,39 @@ const AboutUs = () => {
         </div>
 
         {/* Testimonials Section */}
-        <div id="testimonials">
-          <h3 className="text-2xl font-bold text-gray-800 text-center uppercase tracking-wide m-8">
-            What Our Clients Say
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {[
-              {
-                name: "Sir Engr. Charles Mbelede",
-                title: "KSM,JP,FNSE",
-                phone: "08055237344",
-                image: "/images/SirDr.Charles.jpg",
-                quote:
-                  "PARITE CONSULTS NIG delivered beyond expectations..."
-              },
-              {
-                name: "Sir Emmanuel Onyejekwe",
-                title: "KSM",
-                phone: "08033039680",
-                image: "/images/SirEmmanuelOnyejekwe.jpg",
-                quote:
-                  "Their engineering and project execution skills are top-notch..."
-              }
-            ].map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-16 h-16 rounded-full object-cover mb-4"
-                />
-                <p className="text-gray-700 italic mb-4">“{testimonial.quote}”</p>
-                <h4 className="text-lg font-semibold text-gray-800">{testimonial.name}</h4>
-                <p className="text-sm text-gray-500">{testimonial.title}</p>
-                <p className="text-sm text-gray-600">📞 {testimonial.phone}</p>
-              </div>
-            ))}
-          </div>
+       {/* Testimonials Section */}
+<div id="testimonials">
+  <h3 className="text-2xl font-bold text-gray-800 text-center uppercase tracking-wide m-8">
+    What Our Clients Say
+  </h3>
+
+  {comments.length === 0 ? (
+    <p className="text-center text-gray-500">No testimonials yet.</p>
+  ) : (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {comments.map((comment, index) => (
+        <div
+          key={index}
+          className="bg-white p-6 rounded-lg shadow-md"
+        >
+          <img
+            src={comment.photoURL || "/images/default-user.jpg"} // fallback if no image
+            alt={comment.name || "Anonymous"}
+            className="w-16 h-16 rounded-full object-cover mb-4"
+          />
+          <p className="text-gray-700 italic mb-4">“{comment.text}”</p>
+          <h4 className="text-lg font-semibold text-gray-800">
+            {comment.name || "Anonymous"}
+          </h4>
+          {comment.phone && (
+            <p className="text-sm text-gray-600">📞 {comment.phone}</p>
+          )}
         </div>
+      ))}
+    </div>
+  )}
+</div>
+
 
       </div>
     </section>

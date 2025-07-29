@@ -16,9 +16,10 @@ import { FaRegCommentDots } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import SearchBar from "./SearchBar";
+import { useMyContext } from "../Context/MyContext";
 
 export default function Dishes() {
-  const [dishes, setDishes] = useState([]);
+  // const [dishes, setDishes] = useState([]);
   const [user, setUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [newDish, setNewDish] = useState({
@@ -36,14 +37,16 @@ export default function Dishes() {
   const [commentInput, setCommentInput] = useState("");
   const [commentName, setCommentName] = useState("");
   const [commentsMap, setCommentsMap] = useState({});
+  const { addToCart, dishes, capitalizeWords } = useMyContext();
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "dishes"), (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setDishes(data);
-    });
-    return unsubscribe;
-  }, []);
+
+  // useEffect(() => {
+  //   const unsubscribe = onSnapshot(collection(db, "dishes"), (snapshot) => {
+  //     const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  //     setDishes(data);
+  //   });
+  //   return unsubscribe;
+  // }, []);
 
   useEffect(() => {
     const auth = getAuth();
@@ -168,7 +171,6 @@ export default function Dishes() {
     await deleteDoc(doc(db, "dishes", dishId, "comments", commentId));
   };
 
-  const capitalizeWords = (text) => text.replace(/\b\w/g, (char) => char.toUpperCase());
 
   const filteredDishes = dishes.filter((dish) =>
     dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -231,16 +233,24 @@ export default function Dishes() {
               >
                 <FaRegCommentDots className="mr-1" /> {commentsMap[dish.id]?.length || 0}
               </div>
-              <a
-                href={`https://wa.me/2348038652949?text=${encodeURIComponent(
-                  `🍽️ *Order Request*\n\n*Dish:* ${capitalizeWords(dish.name)}\n*Price:* ₦${dish.priceDiscounted?.toLocaleString()}\n\n[ View Order ]`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
-              >
-                Order
-              </a>
+              {/* <a
+  href={`https://wa.me/2348038652949?text=${encodeURIComponent(
+    `🍽️ *Order Request*\n\n*Dish:* ${capitalizeWords(dish.name)}\n*Price:* ₦${dish.priceDiscounted?.toLocaleString()}\n\n[ View Order ]`
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
+>
+  Order
+</a> */}
+
+<button
+  onClick={() => addToCart(dish, dish.priceDiscounted)}
+  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+>
+  Add to Cart
+</button>
+
             </div>
 
             {user && (
